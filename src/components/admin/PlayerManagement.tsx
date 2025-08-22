@@ -10,16 +10,17 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
-import { mockPlayers, playerActions } from '../../data/mockData';
+import { executePlayerAction } from '../../utils/nui';
+import { playerActions } from '../../data/mockData';
 import type { Permission, Player } from '../../types/admin';
 
 interface PlayerManagementProps {
   permissions: Permission;
+  players: Player[];
 }
 
-export function PlayerManagement({ permissions }: PlayerManagementProps) {
+export function PlayerManagement({ permissions, players }: PlayerManagementProps) {
   const [searchTerm, setSearchTerm] = useState('');
-  const [players] = useState<Player[]>(mockPlayers);
 
   const filteredPlayers = players.filter(
     (player) =>
@@ -29,8 +30,7 @@ export function PlayerManagement({ permissions }: PlayerManagementProps) {
   );
 
   const handlePlayerAction = (playerId: number, actionId: string) => {
-    console.log(`Admin action: ${actionId} on player ${playerId}`);
-    // Here you would send NUI callback to FiveM
+    executePlayerAction(playerId, actionId);
   };
 
   const getGroupBadgeVariant = (group: string) => {
