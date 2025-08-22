@@ -4,7 +4,6 @@ import { Button } from '../ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Textarea } from '../ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
-import { kickPlayer, banPlayer } from '../../utils/nui';
 import { banDurations } from '../../data/mockData';
 
 export function BanMenu() {
@@ -14,17 +13,14 @@ export function BanMenu() {
 
   const handleKick = () => {
     if (!playerId || !reason) return;
-    kickPlayer(parseInt(playerId), reason);
-    setPlayerId('');
-    setReason('');
+    console.log(`Kick player ${playerId} for: ${reason}`);
+    // NUI callback to FiveM
   };
 
   const handleBan = () => {
     if (!playerId || !duration || !reason) return;
-    banPlayer(parseInt(playerId), parseInt(duration), reason);
-    setPlayerId('');
-    setDuration('');
-    setReason('');
+    console.log(`Ban player ${playerId} for ${duration} minutes. Reason: ${reason}`);
+    // NUI callback to FiveM
   };
 
   return (

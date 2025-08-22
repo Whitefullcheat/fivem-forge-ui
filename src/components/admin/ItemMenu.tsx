@@ -4,13 +4,17 @@ import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Badge } from '../ui/badge';
-import { giveItem, removeItem } from '../../utils/nui';
 
-interface ItemMenuProps {
-  items: any[];
-}
+const items = [
+  { id: 'weapon_pistol', name: 'Pistol', category: 'Weapons' },
+  { id: 'bandage', name: 'Bandage', category: 'Medical' },
+  { id: 'bread', name: 'Bread', category: 'Food' },
+  { id: 'water', name: 'Water', category: 'Drinks' },
+  { id: 'lockpick', name: 'Lockpick', category: 'Tools' },
+  { id: 'phone', name: 'Phone', category: 'Electronics' },
+];
 
-export function ItemMenu({ items }: ItemMenuProps) {
+export function ItemMenu() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedPlayer, setSelectedPlayer] = useState<number | null>(null);
 
@@ -21,12 +25,14 @@ export function ItemMenu({ items }: ItemMenuProps) {
 
   const handleGiveItem = (itemId: string) => {
     if (!selectedPlayer) return;
-    giveItem(selectedPlayer, itemId, 1);
+    console.log(`Give item ${itemId} to player ${selectedPlayer}`);
+    // NUI callback to FiveM
   };
 
   const handleRemoveItem = (itemId: string) => {
     if (!selectedPlayer) return;
-    removeItem(selectedPlayer, itemId, 1);
+    console.log(`Remove item ${itemId} from player ${selectedPlayer}`);
+    // NUI callback to FiveM
   };
 
   return (

@@ -3,7 +3,6 @@ import { Button } from '../ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Switch } from '../ui/switch';
 import { Badge } from '../ui/badge';
-import { toggleTrainerTool, selfRevive, selfHeal } from '../../utils/nui';
 import { trainerTools } from '../../data/mockData';
 import type { TrainerTool } from '../../types/admin';
 
@@ -11,24 +10,23 @@ export function TrainerMenu() {
   const [tools, setTools] = useState<TrainerTool[]>(trainerTools);
 
   const handleToggleTool = (toolId: string) => {
-    const tool = tools.find(t => t.id === toolId);
-    if (!tool) return;
-    
-    const newEnabled = !tool.enabled;
     setTools(prev => 
       prev.map(tool => 
-        tool.id === toolId ? { ...tool, enabled: newEnabled } : tool
+        tool.id === toolId ? { ...tool, enabled: !tool.enabled } : tool
       )
     );
-    toggleTrainerTool(toolId, newEnabled);
+    console.log(`Toggle trainer tool: ${toolId}`);
+    // NUI callback to FiveM
   };
 
   const handleSelfRevive = () => {
-    selfRevive();
+    console.log('Self revive');
+    // NUI callback to FiveM
   };
 
   const handleSelfHeal = () => {
-    selfHeal();
+    console.log('Self heal');
+    // NUI callback to FiveM
   };
 
   const enabledCount = tools.filter(tool => tool.enabled).length;
